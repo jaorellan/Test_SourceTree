@@ -63,4 +63,70 @@ public class TaskManager {
             System.out.println("Número no válido.");
         }
     }
+
+    import java.util.*
+
+    class TaskManager {
+        private val tasks = ArrayList<String>()
+        private val scanner = Scanner(System.`in`)
+
+        fun showMenu() {
+            while (true) {
+                println("\nGestor de Tareas:")
+                println("1. Agregar tarea")
+                println("2. Ver tareas")
+                println("3. Eliminar tarea")
+                println("4. Salir")
+                print("Selecciona una opción: ")
+
+                when (scanner.nextInt()) {
+                    1 -> addTask()
+                    2 -> showTasks()
+                    3 -> removeTask()
+                    4 -> {
+                        println("Saliendo del gestor...")
+                        return
+                    }
+                else -> println("Opción no válida. Inténtalo de nuevo.")
+                }
+                scanner.nextLine() // Limpiar buffer
+            }
+        }
+
+        private fun addTask() {
+            print("Escribe la nueva tarea: ")
+            scanner.nextLine().let {
+                tasks.add(it)
+                println("Tarea agregada.")
+            }
+        }
+
+        private fun showTasks() {
+            if (tasks.isEmpty()) {
+                println("No hay tareas.")
+                return
+            }
+            println("Lista de tareas:")
+            tasks.forEachIndexed { index, task -> println("${index + 1}. $task") }
+        }
+
+        private fun removeTask() {
+            showTasks()
+            if (tasks.isEmpty()) return
+
+                    print("Número de la tarea a eliminar: ")
+            val index = scanner.nextInt()
+
+            if (index in 1..tasks.size) {
+                tasks.removeAt(index - 1)
+                println("Tarea eliminada.")
+            } else {
+                println("Número no válido.")
+            }
+            scanner.nextLine() // Limpiar buffer
+        }
+    }
+
+
+
 }
